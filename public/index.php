@@ -1,4 +1,6 @@
 <?php
+// Start a Session
+if (!session_id()) @session_start();
 require_once  '../vendor/autoload.php';
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
   $r->addRoute('GET', '/[{id:\d+}]', ['App\controllers\HomeController', 'index']);
