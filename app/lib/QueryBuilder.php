@@ -1,6 +1,7 @@
 <?php
 
-namespace App;
+namespace App\lib;
+
 use Aura\SqlQuery\QueryFactory;
 use PDO;
 class QueryBuilder{

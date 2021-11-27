@@ -6,7 +6,10 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Tamtamchik\\SimpleFlash\\' => array($vendorDir . '/tamtamchik/simple-flash/src'),
     'League\\Plates\\' => array($vendorDir . '/league/plates/src'),
+    'Kint\\' => array($vendorDir . '/kint-php/kint/src'),
+    'FastRoute\\' => array($vendorDir . '/nikic/fast-route/src'),
     'Aura\\SqlQuery\\' => array($vendorDir . '/aura/sqlquery/src'),
     'App\\' => array($baseDir . '/app'),
 );
