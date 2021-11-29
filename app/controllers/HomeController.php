@@ -5,15 +5,23 @@ use App\exceptions\NotEnoughMoneyException;
 use League\Plates\Engine;
 class HomeController{
     public $templates;
-    public function __construct()
+    public $QueryBuilder;
+
+    public function __construct(Engine $engine, QueryBuilder $QueryBuilder)
     {
-        $this->templates = new Engine('../app/views/');
+        $this->templates = $engine;
+        $this->QueryBuilder = $QueryBuilder;
     }
-    public function index($vars){
-        echo  $this->templates->render('homepage', $vars);
+    public function login(){
+
+        echo  $this->templates->render('login');
+
+    }
+    public function index(){
+        echo  $this->templates->render('homepage');
     }
     public function about($vars)
-    {
+    {   
         try{
 
             $this->withdraw(15);

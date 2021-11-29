@@ -1,4 +1,4 @@
-<?php $this->layout('layout', ['title' => 'О нас']) ?>
+<?php $this->layout('layout/default', ['title' => 'О нас']) ?>
 
 
 

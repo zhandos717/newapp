@@ -1,14 +1,6 @@
 <?php 
- namespace App\exceptions;
-
+namespace App\exceptions;
 use Exception;
-
 class NotEnoughMoneyException extends Exception{
-
-
-    
-
-
-
 
 }

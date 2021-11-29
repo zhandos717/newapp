@@ -1,17 +1,40 @@
 <?php
-// Start a Session
-if (!session_id()) @session_start();
+use Aura\SqlQuery\QueryFactory;
+use Delight\Auth\Auth;
+use DI\ContainerBuilder;
+use League\Plates\Engine;
+
 require_once  '../vendor/autoload.php';
+if (!session_id()) @session_start();
+$containerBuilder = new ContainerBuilder();
+$containerBuilder->addDefinitions([
+  Engine::class => function(){
+    return new Engine('../app/views/');
+  },
+  PDO::class => function(){
+    $driver =  'mysql';
+    $host = '127.0.0.1';
+    $database_name = 'marlindev';
+    $username = 'root';
+    $password =  '';
+    return new PDO("$driver:host=$host;dbname=$database_name",$username,$password);
+  },
+  Auth::class=> function($container){
+    return new Auth($container->get('PDO'));
+  },
+  QueryFactory::class => function(){
+    return new QueryFactory('mysql');
+  },
+]);
+
+
+$container = $containerBuilder->build();
 $dispatcher = FastRoute\simpleDispatcher(function (FastRoute\RouteCollector $r) {
   $r->addRoute('GET', '/[{id:\d+}]', ['App\controllers\HomeController', 'index']);
 
-  $r->addRoute('GET', '/about', ['App\controllers\HomeController', 'about']);
+  $r->addRoute('GET', '/login', ['App\controllers\HomeController', 'login']);
 
-  $r->addRoute('GET', '/users', 'get_all_users_handler');
-  // {id} must be a number (\d+)
-  $r->addRoute('GET', '/user/{id:\d+}', 'get_user_handler');
-  // The /{title} suffix is optional
-  $r->addRoute('GET', '/articles/{id:\d+}[/{title}]', 'get_article_handler');
+  $r->addRoute('GET', '/about', ['App\controllers\HomeController', 'about']);
 });
 // Fetch method and URI from somewhere
 $httpMethod = $_SERVER['REQUEST_METHOD'];
@@ -35,8 +58,6 @@ switch ($routeInfo[0]) {
   case FastRoute\Dispatcher::FOUND:
     $handler = $routeInfo[1];
     $vars = $routeInfo[2];
-    $controller = new $handler[0];
-    call_user_func([$controller, $handler[1]], $vars);
-    // ... call $handler with $vars
+    $container->call($handler, $vars);
     break;
 }
