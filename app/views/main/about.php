@@ -2,7 +2,7 @@
 
 
 
-<?= flash()->display(); ?>
+<?= flash()->display()?>
 
 <h1>О нас </h1>
 <p>Hello, <?= $this->e($name) ?></p>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="utf-8">
     <title>
@@ -24,7 +23,6 @@
     <link rel="mask-icon" href="/img/favicon/safari-pinned-tab.svg" color="#5bbad5">
     <link rel="stylesheet" media="screen, print" href="/css/page-login-alt.css">
 </head>
-
 <body>
     <div class="blankpage-form-field">
         <div class="page-logo m-0 w-100 align-items-center justify-content-center rounded border-bottom-left-radius-0 border-bottom-right-radius-0 px-4">
@@ -35,8 +33,8 @@
             </a>
         </div>
         <div class="card p-4 border-top-left-radius-0 border-top-right-radius-0">
-        
-            <form action="login.php" method="POST">
+            <?= flash()->display() ?>
+            <form action="login" method="POST">
                 <div class="form-group">
                     <label class="form-label" for="username">Email</label>
                     <input type="email" name="email" id="username" class="form-control" placeholder="Эл. адрес" value="">
@@ -55,7 +53,7 @@
             </form>
         </div>
         <div class="blankpage-footer text-center">
-            Нет аккаунта? <a href="page_register.php"><strong>Зарегистрироваться</strong>
+            Нет аккаунта? <a href="register"><strong>Зарегистрироваться</strong>
         </div>
     </div>
     <video poster="/img/backgrounds/clouds.png" id="bgvid" playsinline autoplay muted loop>

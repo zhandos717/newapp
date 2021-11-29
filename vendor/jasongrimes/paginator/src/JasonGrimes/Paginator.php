@@ -278,22 +278,19 @@ class Paginator
         if ($this->numPages <= 1) {
             return '';
         }
-
-        $html = '<ul class="pagination">';
+        $html = '<ul class="pagination justify-content-end">';
         if ($this->getPrevUrl()) {
-            $html .= '<li><a href="' . htmlspecialchars($this->getPrevUrl()) . '">&laquo; '. $this->previousText .'</a></li>';
+            $html .= '<li class="page-item" ><a href="' . htmlspecialchars($this->getPrevUrl()) . '" class="page-link" >&laquo; '. $this->previousText .'</a></li>';
         }
-
         foreach ($this->getPages() as $page) {
             if ($page['url']) {
-                $html .= '<li' . ($page['isCurrent'] ? ' class="active"' : '') . '><a href="' . htmlspecialchars($page['url']) . '">' . htmlspecialchars($page['num']) . '</a></li>';
+                $html .= '<li' . ($page['isCurrent'] ? ' class="page-item active"' : '') . '><a href="' . htmlspecialchars($page['url']) . '" class="page-link" >' . htmlspecialchars($page['num']) . '</a></li>';
             } else {
-                $html .= '<li class="disabled"><span>' . htmlspecialchars($page['num']) . '</span></li>';
+                $html .= '<li class="page-item disabled"><span>' . htmlspecialchars($page['num']) . '</span></li>';
             }
         }
-
         if ($this->getNextUrl()) {
-            $html .= '<li><a href="' . htmlspecialchars($this->getNextUrl()) . '">'. $this->nextText .' &raquo;</a></li>';
+            $html .= '<li class="page-item" ><a href="' . htmlspecialchars($this->getNextUrl()) . '" class="page-link" >'. $this->nextText .' &raquo;</a></li>';
         }
         $html .= '</ul>';
 
